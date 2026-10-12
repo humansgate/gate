@@ -50,6 +50,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Fetch version
+        id: version
+        shell: bash
+        run: |
+          version=$(sed -nE "s/^const VERSION = '([^']+)';$/\1/p" version.dart)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -66,5 +73,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }}
             ghcr.io/${{ env.IMAGE_NAME }}:latest

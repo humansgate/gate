@@ -16,7 +16,7 @@ void main(List<String> args) async {
   final String target = Platform.environment['TARGET'] ?? '';
   final String difficulty = Platform.environment['DIFFICULTY'] ?? '16';
   final String expiration = Platform.environment['SESSION_EXPIRATION_MIN'] ?? '1';
-  final String whitelist = Platform.environment['WHITELIST'] ?? '.well-know,robot.txt,favicon.ico';
+  final String whitelist = Platform.environment['WHITELIST'] ?? '.well-know,robots.txt,favicon.ico';
 
   final httpClient = HttpClient()
     ..maxConnectionsPerHost = 32
