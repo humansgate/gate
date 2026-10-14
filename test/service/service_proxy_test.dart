@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:notclawdbot/client/client_forward.dart';
-import 'package:notclawdbot/service/service_pow.dart';
-import 'package:notclawdbot/service/service_proxy.dart';
-import 'package:notclawdbot/service/service_templating.dart';
+import 'package:humansgate/client/client_forward.dart';
+import 'package:humansgate/service/service_pow.dart';
+import 'package:humansgate/service/service_forward.dart';
+import 'package:humansgate/service/service_templating.dart';
 import 'package:shelf/shelf.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';

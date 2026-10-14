@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
-import 'package:notclawdbot/client/client_forward.dart';
-import 'package:notclawdbot/controller/controller_proxy.dart';
-import 'package:notclawdbot/service/service_pow.dart';
-import 'package:notclawdbot/service/service_proxy.dart';
-import 'package:notclawdbot/service/service_templating.dart';
+import 'package:humansgate/client/client_forward.dart';
+import 'package:humansgate/controller/controller_forward.dart';
+import 'package:humansgate/service/service_pow.dart';
+import 'package:humansgate/service/service_forward.dart';
+import 'package:humansgate/service/service_templating.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 
@@ -29,7 +29,7 @@ void main(List<String> args) async {
   final ServicePow toll = ServicePow(int.parse(difficulty));
   final ServiceForward serviceProxy = ServiceForward(clientForward, templating, toll, whitelist.split(','));
 
-  final ControllerProxy controller = ControllerProxy(serviceProxy);
+  final ControllerForward controller = ControllerForward(serviceProxy);
 
   serviceProxy.startCron(Duration(minutes: int.parse(expiration)));
 

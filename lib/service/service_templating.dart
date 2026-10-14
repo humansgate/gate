@@ -1,4 +1,4 @@
-import 'package:notclawdbot/template/index.dart';
+import 'package:humansgate/template/index.dart';
 
 class ServiceTemplating {
   String render(String url, String challenge, int difficulty) {

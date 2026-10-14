@@ -18,19 +18,22 @@ class ClientForward {
     'content-length',
     'transfer-encoding',
     'connection',
+    'content-encoding'
   };
 
   Future<Response> forward(Request request) async {
-    final targetUrl = _targetUri.replace(
-      path: request.requestedUri.path,
-      query: request.requestedUri.hasQuery
-          ? request.requestedUri.query
-          : null,
+    final targetUrl = _targetUri.resolveUri(
+      Uri(
+        path: _targetUri.path + request.requestedUri.path,
+        query: request.requestedUri.hasQuery ? request.requestedUri.query : null,
+      ),
     );
+    print(targetUrl);
 
     // Stream the incoming body instead of buffering it as a String.
     final forward = http.StreamedRequest(request.method, targetUrl);
 
+    // pass headers from request to forward, remove header set by http client
     request.headers.forEach((key, value) {
       if (!_excludedHeaders.contains(key.toLowerCase())) {
         forward.headers[key] = value;
@@ -51,6 +54,7 @@ class ClientForward {
     try {
       final response = await _client.send(forward);
 
+      // pass headers from response to forward, remove header set by http client
       final responseHeaders = <String, String>{};
       response.headers.forEach((key, value) {
         if (!_excludedHeaders.contains(key.toLowerCase())) {
@@ -61,8 +65,8 @@ class ClientForward {
       // Stream the response body straight back to the caller.
       return Response(
         response.statusCode,
-        headers: response.headers,
-        body: response.stream, // Stream<List<int>>, not buffered bytes
+        headers: responseHeaders,
+        body: response.stream,
       );
     } catch (e) {
       return Response.internalServerError(body: 'Proxy error: $e\n');

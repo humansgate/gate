@@ -1,4 +1,4 @@
-import {test, expect, chromium} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test('Success PoW', async ({ page }) => {
   test.setTimeout(60_000);
@@ -13,7 +13,7 @@ test('Success PoW', async ({ page }) => {
   await page.goto('http://localhost:8080/');
 
   // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Demo UseToll/, {timeout: 120_000});
+  await expect(page).toHaveTitle(/HumansGate/, {timeout: 120_000});
 
   const end = new Date().getTime();
   console.log('Time', end - start , 'on', renderer);

@@ -1,12 +1,14 @@
 import 'dart:async';
 
-import 'package:notclawdbot/client/client_forward.dart';
-import 'package:notclawdbot/dto/source.dart';
-import 'package:notclawdbot/service/service_templating.dart';
-import 'package:notclawdbot/service/service_pow.dart';
+import 'package:humansgate/client/client_forward.dart';
+import 'package:humansgate/dto/source.dart';
+import 'package:humansgate/service/service_templating.dart';
+import 'package:humansgate/service/service_pow.dart';
 import 'package:shelf/shelf.dart';
 
 class ServiceForward {
+  static const powPage = 'humansgatepow.html';
+
   final ClientForward _clientForward;
   final ServiceTemplating _templating;
   final ServicePow _toll;
@@ -35,7 +37,7 @@ class ServiceForward {
       return _clientForward.forward(request);
     }
 
-    final redirect = Response.found('${request.url.host}/notclawdbot.html?url=$url');
+    final redirect = Response.found('${request.url.host}/$powPage?url=$url');
     if (nonces.isEmpty) {
       return redirect;
     }

@@ -1,5 +1,5 @@
-import 'package:notclawdbot/dto/source.dart';
-import 'package:notclawdbot/service/service_pow.dart';
+import 'package:humansgate/dto/source.dart';
+import 'package:humansgate/service/service_pow.dart';
 import 'package:test/test.dart';
 
 void main() {

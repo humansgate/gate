@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
-import 'package:notclawdbot/dto/source.dart';
+import 'package:humansgate/dto/source.dart';
 
 class ServicePow {
   final int difficulty;

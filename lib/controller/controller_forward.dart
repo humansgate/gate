@@ -1,22 +1,22 @@
 import 'dart:io';
 
-import 'package:notclawdbot/dto/source.dart';
-import 'package:notclawdbot/service/service_proxy.dart';
+import 'package:humansgate/dto/source.dart';
+import 'package:humansgate/service/service_forward.dart';
 import 'package:shelf/shelf.dart';
 
-class ControllerProxy {
+class ControllerForward {
   final ServiceForward _service;
-  static const cookieId = 'USETOLL';
+  static const cookieId = 'HUMANSGATE';
 
-  ControllerProxy(this._service);
+  ControllerForward(this._service);
 
   Future<Response> handle(Request request) {
-    if (request.url.path.startsWith('notclawdbot.html') &&
+    if (request.url.path.startsWith(ServiceForward.powPage) &&
         request.url.queryParameters.containsKey('nonce')) {
       return handlePowVerify(request);
     }
 
-    if (request.url.path.startsWith('notclawdbot.html')) {
+    if (request.url.path.startsWith(ServiceForward.powPage)) {
       return handleWebPage(request);
     }
 
